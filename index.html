@@ -1,25 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
     <link type="text/css" href="style.css" rel="stylesheet">
 </head>
+
 <body>
-    <!-- There will be four crystals displayed as buttons on the page. --> 
-    <div id="container">
-        <div id="container">
-            <button id="button1"></button>
-            <button id="button2"></button>
-            <button id="button3"></button>
-            <button id="button4"></button>
+    <!-- There will be four crystals displayed as buttons on the page. -->
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body" id="goal-count">
+                            Basic panel example
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="panel panel-default" id="score-count">
+                        <div class="panel-body" id="score-count">
+                            Basic panel example
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body" id="win-count">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body" id="loss-count">
+                            0
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <button type="button" id="button1" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" id="button2" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" id="button3" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" id="button4" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="nav nav-pills">
+                        <li role="presentation" class="active" id="reset-btn">
+                            <a>reset</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+
+        // game object
+        var game = {
+            wins: 0,
+            losses: 0,
+            goal: 0,
+            scoreCount: 0,
+            buttonValues: [],
+            reset: function () {
+                // sets a new goal
+                game.goal = Math.floor(Math.random() * 102) + 19;
+
+                // pushes goal to html
+                $("#goal-count").text(game.goal);
+
+                // resets score
+                game.scoreCount = 0;
+                $("#score-count").text(game.scoreCount);
+
+                // creates new button values 
+                game.buttonValues = [];
+                for (i = 0; i < 4; i++) {
+                    game.buttonValues.push(game.rng());
+                }
+
+                // assigns values to buttons
+                $("#button1").attr("value", game.buttonValues[0]);
+                $("#button2").attr("value", game.buttonValues[1]);
+                $("#button3").attr("value", game.buttonValues[2]);
+                $("#button4").attr("value", game.buttonValues[3]);
+            },
+
+            // generates and returns random number
+            rng: function () {
+                return Math.floor(Math.random() * 12) + 1;
+            },
+
+            // resets game and adds one to wins
+            win: function () {
+                alert("you win");
+                game.reset();
+                game.wins++;
+                $("#win-count").text(game.wins);
+            },
+
+            // resets game and adds one to losses
+            lose: function () {
+                alert("you lose");
+                game.reset();
+                game.losses++;
+                $("#loss-count").text(game.losses);
+            }
+        }
+
+        game.reset();
+
+
+        console.log(game.buttonValues);
+        $("button").click(function () {
+            let value = $(this).val();
+            game.scoreCount = (parseInt(value)) + (parseInt(game.scoreCount))
+            console.log(value);
+            console.log(game.scoreCount);
+            $("#score-count").text(game.scoreCount);
+            if (game.scoreCount == game.goal) {
+                game.win();
+            } else {
+                if (game.scoreCount > game.goal) {
+                    game.lose();
+                }
+            }
+        });
+
+        $("#reset-btn").click(function () {
+            game.reset();
+        });
+    </script>
 </body>
+
 </html>

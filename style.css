@@ -1,11 +1,20 @@
-#container {
+.btn-default {
     width: 100%;
-    margin: 0 auto;
+    height: 200px;
 }
 
-button {
-    height: 200px;
-    width: 22%;
+.panel-default {
+    height: 25px;
+    line-height: 25px;
+}
+
+.letter {
     float: left;
-    margin: 0 auto;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#coin-image {
+    height: 40%;
+    width: 40%;
 }
