@@ -46,6 +46,9 @@ var game = {
 
         // resets all game parameters
 
+        // resets button images
+        $(".btn-default").html("<img src='assets/images/img0.png'>");
+
         // sets a new goal
         game.goal = Math.floor(Math.random() * 49) + 19;
 
@@ -124,6 +127,10 @@ $("button").click(function () {
 
     // update the score 
     $("#score-count").text(game.scoreCount);
+
+    if ($(this).val()) {
+        $(this).text($(this).val());
+    }
 
     // check if the score equals the goal (win condition)
     if (game.scoreCount == game.goal) {
