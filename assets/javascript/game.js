@@ -47,7 +47,7 @@ var game = {
         // resets all game parameters
 
         // sets a new goal
-        game.goal = Math.floor(Math.random() * 102) + 19;
+        game.goal = Math.floor(Math.random() * 49) + 19;
 
         // pushes goal to html
         $("#goal-count").text(game.goal);
