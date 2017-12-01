@@ -50,7 +50,7 @@ var game = {
         $(".btn-default").html("<img src='assets/images/img0.png'>");
 
         // sets a new goal
-        game.goal = Math.floor(Math.random() * 49) + 19;
+        game.goal = Math.floor(Math.random() * (49 - 19) + 19);
 
         // pushes goal to html
         $("#goal-count").text(game.goal);
