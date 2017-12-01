@@ -81,6 +81,7 @@ var game = {
 
             // reassigns values until redundancy is eliminated
             game.buttonValues[1] = (game.rng());
+            $("#button2").attr("value", game.buttonValues[1]);
 
         }
 
@@ -92,6 +93,7 @@ var game = {
 
             // reassigns values until redundancy is eliminated
             game.buttonValues[2] = (game.rng());
+            $("#button3").attr("value", game.buttonValues[2]);
 
         }
 
@@ -103,6 +105,7 @@ var game = {
 
             // reassigns values until redundancy is eliminated
             game.buttonValues[3] = (game.rng());
+            $("#button4").attr("value", game.buttonValues[3]);
 
         }
 
