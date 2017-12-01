@@ -5,7 +5,61 @@ var game = {
     goal: 0,
     scoreCount: 0,
     buttonValues: [],
+    images: [],
+    imageOptions: ["img0.png", "img1.png", "img2.png", "img3.png"],
+    // generates and returns random number
+    rng: function () {
+        return Math.floor(Math.random() * 12) + 1;
+    },
+
+    // resets game and adds one to wins
+    win: function () {
+        $("#score-count").text(game.scoreCount);
+        alert("you win");
+        setTimeout(game.reset, 1000);
+        game.wins++;
+        $("#win-count").text(game.wins);
+    },
+
+    // resets game and adds one to losses
+    lose: function () {
+        $("#score-count").text(game.scoreCount);
+        alert("you lose");
+        setTimeout(game.reset, 1000);
+        game.losses++;
+        $("#loss-count").text(game.losses);
+    },
+
+    // resets button images
+    imgReset: function () {
+
+        // resets array
+        game.images = [];
+
+        // creates 4 numbers
+        for (i = 0; i < 4; i++) {
+
+            // generate a random number between 0 - 3
+            let index = Math.floor(Math.random() * 4);
+
+            if (game.images.includes(index)) {
+
+                index = Math.floor((Math.random() * 4));
+
+            }
+
+            game.images.push(index);
+
+
+        }
+
+    },
+
+    // reset game
     reset: function () {
+
+        // resets all game parameters
+
         // sets a new goal
         game.goal = Math.floor(Math.random() * 102) + 19;
 
@@ -21,55 +75,90 @@ var game = {
         for (i = 0; i < 4; i++) {
             game.buttonValues.push(game.rng());
         }
+        //    
 
-        // assigns values to buttons
+        game.imgReset();
+
+        // assigns values to buttons while checking for, and eliminating, redundancy
+
+        // ==================== assigns value to button 0 ====================
         $("#button1").attr("value", game.buttonValues[0]);
+
+        // ==================== assigns value to button 1 ====================
         $("#button2").attr("value", game.buttonValues[1]);
+
+        // checks if the new value of button 1 is the same as the value of button 0
+        if (game.buttonValues[1] == game.buttonValues[0]) {
+
+            // reassigns values until redundancy is eliminated
+            game.buttonValues[1] = (game.rng());
+
+        }
+
+        // ==================== assigns value to button 2 ====================
         $("#button3").attr("value", game.buttonValues[2]);
+
+        // checks if the new value of button 2 is the same as the value of button 1 or button 0
+        if (game.buttonValues[2] == game.buttonValues[1] || game.buttonValues[2] == game.buttonValues[0]) {
+
+            // reassigns values until redundancy is eliminated
+            game.buttonValues[2] = (game.rng());
+
+        }
+
+        // ==================== assigns value to button 3 ====================
         $("#button4").attr("value", game.buttonValues[3]);
-    },
 
-    // generates and returns random number
-    rng: function () {
-        return Math.floor(Math.random() * 12) + 1;
-    },
+        // checks if the new value of button 3 is the same as the value of button 2, button 1, or button 0
+        if (game.buttonValues[3] == game.buttonValues[2] || game.buttonValues[3] == game.buttonValues[1] || game.buttonValues[3] == game.buttonValues[0]) {
 
-    // resets game and adds one to wins
-    win: function () {
-        alert("you win");
-        game.reset();
-        game.wins++;
-        $("#win-count").text(game.wins);
-    },
+            // reassigns values until redundancy is eliminated
+            game.buttonValues[3] = (game.rng());
 
-    // resets game and adds one to losses
-    lose: function () {
-        alert("you lose");
-        game.reset();
-        game.losses++;
-        $("#loss-count").text(game.losses);
-    }
+        }
+
+        // dev console.log
+        console.log(game.buttonValues);
+        // 
+
+    },
 }
 
+// initialize game on load
 game.reset();
 
-
-console.log(game.buttonValues);
+// when a button is clicked
 $("button").click(function () {
+
+    // get the buttons value 
     let value = $(this).val();
+
+    // add the value to score 
     game.scoreCount = (parseInt(value)) + (parseInt(game.scoreCount))
-    console.log(value);
-    console.log(game.scoreCount);
+
+    // update the score 
     $("#score-count").text(game.scoreCount);
+
+    // check if the score equals the goal (win condition)
     if (game.scoreCount == game.goal) {
+
+        // win game
         game.win();
+
+
     } else {
+        // check if score exceeds goal (loss condition)
         if (game.scoreCount > game.goal) {
+
+            // lose game
             game.lose();
         }
     }
 });
 
+// when reset button is clicked
 $("#reset-btn").click(function () {
+
+    // reset game
     game.reset();
 });

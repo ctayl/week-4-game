@@ -57,8 +57,15 @@ a {
 
 .panel-body {
     margin-top: 33%;
+    font-size: 40px;
+    text-align: center;
 }
 
 .panel-default {
     height: 200px;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
 }
