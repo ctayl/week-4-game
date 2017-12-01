@@ -10,8 +10,6 @@
 
 li {
     width: 100%;
-    margin-top: 46%;
-    margin-bottom: 46%;
 }
 
 a {
@@ -68,4 +66,12 @@ a {
 img {
     max-height: 100%;
     max-width: 100%;
+}
+
+h2 {
+    line-height: 100px;
+}
+
+.jumbotron {
+    padding-left: 15px;
 }

@@ -31,27 +31,13 @@ var game = {
     },
 
     // resets button images
-    imgReset: function () {
+    winLossReset: function () {
 
-        // resets array
-        game.images = [];
-
-        // creates 4 numbers
-        for (i = 0; i < 4; i++) {
-
-            // generate a random number between 0 - 3
-            let index = Math.floor(Math.random() * 4);
-
-            if (game.images.includes(index)) {
-
-                index = Math.floor((Math.random() * 4));
-
-            }
-
-            game.images.push(index);
-
-
-        }
+        // resets win and loss counter
+        game.wins = 0;
+        game.losses = 0;
+        $("#win-count").text(game.wins);
+        $("#loss-count").text(game.losses);
 
     },
 
@@ -77,7 +63,7 @@ var game = {
         }
         //    
 
-        game.imgReset();
+        
 
         // assigns values to buttons while checking for, and eliminating, redundancy
 
@@ -161,4 +147,5 @@ $("#reset-btn").click(function () {
 
     // reset game
     game.reset();
+    game.winLossReset();
 });
