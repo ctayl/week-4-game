@@ -40,18 +40,25 @@ var game = {
         for (i = 0; i < 4; i++) {
 
             // generate a random number between 0 - 3
-            let index = Math.floor(Math.random() * 4);
+            var index = Math.floor(Math.random() * 4);
 
             if (game.images.includes(index)) {
 
                 index = Math.floor((Math.random() * 4));
 
             }
+                game.images.push(index);
+            
 
-            game.images.push(index);
+            
 
 
         }
+
+        // $("#b0").attr("src", game.imageOptioms[0]);
+        // $("#b1").attr("src", game.imageOptions[1]);
+        // $("#b2").attr("src", game.imageOptions[2]);
+        // $("#b3").attr("src", game.imageOptions[3]);
 
     },
 
